@@ -1,8 +1,330 @@
+<script>
+  (function () {
+	function hasTouch() {
+			return 'ontouchstart' in document.documentElement;
+	}
+	var img_ele = null,
+			event_start = hasTouch() ? 'touchstart' : 'mousedown',
+			event_move = hasTouch() ? 'touchmove' : 'mousemove',
+			event_end = hasTouch() ? 'touchend' : 'mouseup';
+      console.log(event_start + "|" + event_move + "|" + event_end);
+	(function () {
+		function zoom(zoomincrement) {
+			img_ele = document.getElementById('drag-img');
+  		var pre_width = img_ele.getBoundingClientRect().width,
+    			pre_height = img_ele.getBoundingClientRect().height;
+			img_ele.style.width = (pre_width * zoomincrement) + 'px';
+  		img_ele.style.height = (pre_height * zoomincrement) + 'px';
+  		img_ele = null;
+		}
+		document.getElementById('zoomout').addEventListener('click', function() {
+  		zoom(0.5);
+		});
+		document.getElementById('zoomin').addEventListener('click', function() {
+  		zoom(1.5);
+		});	
+	}());
+	(function () {	
+		function start_drag(event) {
+			var x_cursor = hasTouch() ? event.changedTouches[0].clientX : event.clientX,
+					y_cursor = hasTouch() ? event.changedTouches[0].clientY : event.clientY;
+			img_ele = this;			
+			x_img_ele = x_cursor - img_ele.offsetLeft;
+			y_img_ele = y_cursor - img_ele.offsetTop;
+			console.log("start drag");
+		}
+		function stop_drag() {
+  		img_ele = null;
+  		console.log("stop drag");
+		}
+		function while_drag(event) {
+			var x_cursor = hasTouch() ? event.changedTouches[0].clientX : event.clientX,
+					y_cursor = hasTouch() ? event.changedTouches[0].clientY : event.clientY;
+  		if (img_ele !== null) {
+    		img_ele.style.left = (x_cursor - x_img_ele) + 'px';
+    		img_ele.style.top = (y_cursor - y_img_ele) + 'px';
+    		console.log('dragging > img_left:' + img_ele.style.left + ' | img_top: ' + img_ele.style.top);
+  		}
+		}		
+	document.getElementById('drag-img').addEventListener(event_start, start_drag);
+	document.getElementById('container').addEventListener(event_move, while_drag);
+	document.getElementById('container').addEventListener(event_end, stop_drag);
+	}());
+}());
+</script>
+
 <style>
 html {
   overflow: hidden;
   overscroll-behavior: none;
 }
+  
+  body {
+    overflow: hidden;
+  background:black;
+}
+
+#container {
+    height: 1920px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+
+#drag-img {
+  cursor: move;
+  position: relative;
+  width: 100%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  
+}
+
+#container {
+  overflow: hidden;
+  background: #B78034;
+  hheight: 1000px;
+  width: 100%;
+ 
+}
+
+.button {
+  width: 200px;
+  height: 50px;
+}
+.navy{position:absolute;
+top:5px;
+display:none;}
+
+.bg{width:6000px;z-index;1}
+
+.controlroof{
+  width:175px;
+  z-index:3;
+  position:absolute;
+top:3050px;
+  left:1828px;
+  opacity:0.9;
+  transition: 0.3s;
+}
+.controlroof:hover{
+  opacity:0;
+  top:3000px;
+  transition: 0.3s;
+}
+
+
+
+
+.templeroof{width:790px;
+  z-index:2;
+  position:absolute;
+top:3248px;
+  left:3118px;
+    opacity:0.9;
+  transition: 0.3s;
+}
+
+.templeroof:hover{
+  opacity:0;
+  top:3100px;
+  transition: 0.3s;
+}
+
+
+
+
+
+
+.twodoorarch{width:405px;
+  z-index:2;
+  position:absolute;
+top:1648px;
+  left:2869px;
+    opacity:0.9;
+  transition: 0.3s;
+}
+
+.twodoorarch:hover{
+  opacity:0;
+  top:1670px;
+  transition: 0.3s;
+}
+
+
+.jabbaroof{width:610px;
+  z-index:2;
+  position:absolute;
+top:2535px;
+  left:483px;
+    opacity:0.9;
+  transition: 0.3s;
+}
+.jabbaroof:hover{
+  opacity:0;
+  top:2515px;
+  transition: 0.3s;
+}
+
+.flycastle{width:310px;
+  z-index:2;
+  position:absolute;
+top:2745px;
+  left:1103px;
+   animation: hovv 3s ease 0s infinite alternate-reverse both;
+  transition: 0.3s;
+}
+
+
+.comproof{
+  width:241px;
+  z-index:3;
+  position:absolute;
+top:3179px;
+  left:1370px;
+  opacity:0.9;
+  transition: 0.3s;
+}
+.comproof:hover{opacity:0;
+  top:3109px;
+transition: 0.3s;}
+
+.ladyroof{
+  width:373px;
+  z-index:3;
+  position:absolute;
+top:3169px;
+  left:814px;
+  opacity:0.9;
+  transition: 0.3s;
+}
+.ladyroof:hover{opacity:0;
+  top:3109px;
+transition: 0.3s;}
+
+
+.speederangle{
+  width:380px;
+  z-index:3;
+  position:absolute;
+top:3705px;
+  left:2800px;
+   animation: hovv 1s ease 0s infinite alternate-reverse both;
+  transition: 0.3s;
+
+}
+
+.speederangle:hover{
+  top:3615px;
+  left:2700px;
+  transition: 0.3s;
+}
+.ufo{
+  width:85px;
+  z-index:4;
+  position:absolute;
+top:3290px;
+  left:2326px;
+  transition: 0.3s;
+   animation: hovv 2s ease 0s infinite alternate-reverse both;
+      transition: 0.3s;
+}
+
+.speederbike{
+  width:250px;
+  z-index:4;
+  position:absolute;
+top:3490px;
+  left:1726px;
+  transition: 0.3s;
+   animation: hovv 1s ease 0s infinite alternate-reverse both;
+      transition: 0.3s;
+}
+.speederbike:hover{transition: 0.3s;
+top:3480px;
+transition: 0.3s;}
+
+.lavaroof{
+  width:1480px;
+  z-index:3;
+  position:absolute;
+top:3493px;
+  left:1426px;
+  opacity:0.9;
+  transition: 0.3s;
+}
+.lavaroof:hover{opacity:0;
+  top:3445px;
+transition: 0.3s;}
+
+.twoseater{width:480px;
+  z-index:2;
+  position:absolute;
+top:1300px;
+  left:900px;
+  animation: hovv 1s ease 0s infinite alternate-reverse both;
+      transition: 0.3s;
+}
+
+.twoseater:hover{top:1280px;
+  left:900px;
+ transition: 0.3s;}
+  
+.darkship{width:480px;
+  z-index:2;
+  position:absolute;
+  top:3120px;
+  left:4000px;
+  animation: hovv 1s ease 0s infinite alternate-reverse both;
+}
+
+.balloon{width:110px;
+  z-index:5;
+  position:absolute;
+  top:2870px;
+  left:2960px;
+  animation: hovv 1s ease 0s infinite alternate-reverse both;
+}
+
+.transport{width:640px;
+  z-index:2;
+  position:absolute;
+  top:3780px;
+  left:3500px;
+  animation: hovv 1s ease 0s infinite alternate-reverse both;
+    transition: 0.3s;
+}
+
+
+.transport:hover{
+ top:3820px;
+  left:3450px;
+  transition: 0.3s;
+}
+
+
+.ship{width:480px;
+  z-index:2;
+  position:absolute;
+top:2350px;
+  left:1500px;
+  animation: hovv 1s ease 0s infinite alternate-reverse both;
+}
+
+@keyframes hovv {
+	0% {
+		transform: translateY(0);
+	}
+
+	100% {
+		transform: translateY(-20px);
+	}
+}
+
+
+
+  
 </style>
 
 <div id="container">
